@@ -20,7 +20,7 @@ var capteurG: RayCast3D
 var capteurD: RayCast3D
 var capteurOB: RayCast3D
 
-var thonkingLabel: Label3D
+var thonking
 
 @export var movement_vector: Vector3 = Vector3.ZERO
 @export var is_manual_control: bool = true
@@ -53,7 +53,7 @@ func _physics_process(delta: float):
 	if is_manual_control:
 		get_input()
 	else:
-		print("obstacle:", getJsonObstacleInfo())
+		print("thonking:", thonking)
 		if getJsonObstacleInfo() < 15 && getJsonObstacleInfo() != 0 || avoidingObstacle:
 			avoidObstacle()
 			steer_direction = lerp(steer_direction, desiredSteering * steering_angle, steeringSpeed * delta)
@@ -115,7 +115,7 @@ func getCapteurInfo():
 				capteurCD.is_colliding(),
 				capteurD.is_colliding()]
 	return info
-	
+
 func getCapteurObstacleInfo():
 	if capteurOB.is_colliding():
 		var collision_point = capteurOB.get_collision_point()
@@ -123,20 +123,11 @@ func getCapteurObstacleInfo():
 		return distance
 	else:
 		return 0
-		
+
 func getJsonObstacleInfo():
 	return getJsonInfo().get("distance")
-	
-func getJsonInfo():
-	var json_as_text = FileAccess.get_file_as_string(jsonSensorReadFilePath)
-	var json_as_dict = JSON.parse_string(json_as_text)
-	if (json_as_dict == null):
-		return lastJsonData
-		
-	lastJsonData = json_as_dict
-	return json_as_dict
-	
-func lineFollower():
+
+func getJsonLineInfo():
 	var lineData = getJsonInfo().get("line")
 	var info = []
 	
@@ -145,6 +136,19 @@ func lineFollower():
 			info.insert(0, true)
 		else:
 			info.insert(0, false)
+	return info
+
+func getJsonInfo():
+	var json_as_text = FileAccess.get_file_as_string(jsonSensorReadFilePath)
+	var json_as_dict = JSON.parse_string(json_as_text)
+	if (json_as_dict == null):
+		return lastJsonData
+		
+	lastJsonData = json_as_dict
+	return json_as_dict
+
+func lineFollower():
+	var info = getJsonLineInfo()
 
 	print("line:", info)
 	
@@ -295,35 +299,34 @@ func avoidObstacle():
 	avoidingObstacle = true
 	
 	if (step == 0):
-		#setThonking("🤨")
+		setThonking("🤨")
 		setDesiredSpeed(0)
 		await get_tree().create_timer(2).timeout
 		step = 1
 	elif (step == 1):
-		#setThonking("🫥")
+		setThonking("🫥")
 		setDesiredSteering(0)
 		setDesiredSpeed(-0.2)
-		if (getCapteurObstacleInfo() > 15):
+		if (getJsonObstacleInfo() > 15):
 			step = 2
 	elif (step == 2):
-		#setThonking("🎯")
+		setThonking("🎯")
 		setDesiredSpeed(0.3)
 		setDesiredSteering(0.7)
 		await get_tree().create_timer(3.5).timeout
 		step = 3
 	elif (step == 3):
-		#setThonking("✌️")
+		setThonking("✌️")
 		setDesiredSpeed(0.3)
 		setDesiredSteering(-0.25)
-		print(getCapteurInfo())
-		if (getCapteurInfo() != [false, false, false, false, false]):
+		if (getJsonLineInfo() != [false, false, false, false, false]):
 			setDesiredSpeed(0)
 			await get_tree().create_timer(0.5).timeout
 			step = 0
 			avoidingObstacle = false
 
 func setThonking(_text):
-	thonkingLabel.text = _text
+	thonking = _text
 
 func saveState():
 	var dict: Dictionary
