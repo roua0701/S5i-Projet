@@ -31,8 +31,9 @@ var twoLastStates = [null, null]
 var courseEnded: bool = false
 var lineNotFound: bool = true
 
-var jsonshit: FiniteStateMachine
-var jsonSensorFilePath = "/home/pi/sensors.json"
+var jsonSensorReadFilePath = "/home/pi/sensors.json"
+var jsonSensorWriteFilePath = "/home/pi/godot_out.json"
+var lastJsonData
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -52,7 +53,8 @@ func _physics_process(delta: float):
 	if is_manual_control:
 		get_input()
 	else:
-		if getCapteurObstacleInfo() < 15 && getCapteurObstacleInfo() != 0 || avoidingObstacle:
+		print("obstacle:", getJsonObstacleInfo())
+		if getJsonObstacleInfo() < 15 && getJsonObstacleInfo() != 0 || avoidingObstacle:
 			avoidObstacle()
 			steer_direction = lerp(steer_direction, desiredSteering * steering_angle, steeringSpeed * delta)
 		elif !avoidingObstacle:
@@ -61,6 +63,7 @@ func _physics_process(delta: float):
 			steer_direction = lerp(steer_direction, desiredSteering * steering_angle, steeringSpeed * delta)
 	calculate_steering(delta)
 	calculate_acceleration(delta)
+	saveState()
 	
 	movement_vector = Vector3.FORWARD * currentSpeed
 	
@@ -120,18 +123,31 @@ func getCapteurObstacleInfo():
 		return distance
 	else:
 		return 0
-
-func getJsonLineInfo():
-	var json_as_text = FileAccess.get_file_as_string(jsonSensorFilePath)
+		
+func getJsonObstacleInfo():
+	return getJsonInfo().get("distance")
+	
+func getJsonInfo():
+	var json_as_text = FileAccess.get_file_as_string(jsonSensorReadFilePath)
 	var json_as_dict = JSON.parse_string(json_as_text)
+	if (json_as_dict == null):
+		return lastJsonData
+		
+	lastJsonData = json_as_dict
 	return json_as_dict
 	
 func lineFollower():
-	var info = getCapteurInfo()
+	var lineData = getJsonInfo().get("line")
+	var info = []
 	
-	var info2 = getJsonLineInfo()
-	print(info2.get("distance"))
+	for i in range(lineData.size()):
+		if lineData[(lineData.size()- 1) - i] < 70:
+			info.insert(0, true)
+		else:
+			info.insert(0, false)
 
+	print("line:", info)
+	
 	twoLastStates.insert(0, info)
 	if twoLastStates.size() > 3:
 		twoLastStates.pop_back()
@@ -308,3 +324,12 @@ func avoidObstacle():
 
 func setThonking(_text):
 	thonkingLabel.text = _text
+
+func saveState():
+	var dict: Dictionary
+	dict["steering"] = steer_direction
+	dict["speed"] = currentSpeed
+	
+	var file = FileAccess.open(jsonSensorWriteFilePath, FileAccess.WRITE)
+	file.store_line(var_to_str(dict))
+	file.close()
