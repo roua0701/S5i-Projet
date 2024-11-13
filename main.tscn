@@ -1,0 +1,94 @@
+[gd_scene load_steps=13 format=3 uid="uid://bk5l7umgip4v5"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_eka3w"]
+[ext_resource type="Script" path="res://addons/finite_state_machine/scripts/finite_state_machine.gd" id="2_wl1fq"]
+[ext_resource type="Script" path="res://scripts/fsm/NetworkInitState.gd" id="3_lglb8"]
+[ext_resource type="Script" path="res://scripts/fsm/NetworkWaitingState.gd" id="4_s7v0d"]
+[ext_resource type="Script" path="res://scripts/fsm/NetworkConnectingState.gd" id="5_itktg"]
+[ext_resource type="Script" path="res://scripts/fsm/NetworkProcessState.gd" id="6_017ts"]
+[ext_resource type="Script" path="res://assets/3d/uploads_files_2176038_SHC+Free+Cybertruck/picar_movement.gd" id="8_fj3t6"]
+[ext_resource type="PackedScene" uid="uid://dhw27gk6nbfgu" path="res://assets/3d/uploads_files_2176038_SHC+Free+Cybertruck/SHC Free Cybertruck.blend" id="8_q3755"]
+
+[sub_resource type="GDScript" id="GDScript_d2gei"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jv41d"]
+sky_top_color = Color(0.635294, 0.756863, 0.901961, 1)
+sky_horizon_color = Color(0.839216, 0.890196, 0.929412, 1)
+ground_bottom_color = Color(0.580392, 0.737255, 0.796078, 1)
+ground_horizon_color = Color(0.686275, 0.815686, 0.890196, 1)
+
+[sub_resource type="Sky" id="Sky_g65ru"]
+sky_material = SubResource("ProceduralSkyMaterial_jv41d")
+
+[sub_resource type="Environment" id="Environment_c8ocf"]
+background_mode = 2
+sky = SubResource("Sky_g65ru")
+
+[node name="Main" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0100098, 0.0284071, -0.0135775)
+script = ExtResource("1_eka3w")
+
+[node name="NetworkFSM" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+script = ExtResource("2_wl1fq")
+current_state = NodePath("NetworkProcessState")
+
+[node name="NetworkInitState" type="Node" parent="NetworkFSM"]
+script = ExtResource("3_lglb8")
+
+[node name="NetworkWaitingState" type="Node" parent="NetworkFSM"]
+script = ExtResource("4_s7v0d")
+
+[node name="NetworkConnectingState" type="Node" parent="NetworkFSM"]
+script = ExtResource("5_itktg")
+
+[node name="NetworkProcessState" type="Node" parent="NetworkFSM"]
+script = ExtResource("6_017ts")
+
+[node name="NetworkDisconnectingState" type="Node" parent="NetworkFSM"]
+script = SubResource("GDScript_d2gei")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_c8ocf")
+
+[node name="CarObject" type="Node3D" parent="."]
+transform = Transform3D(-1.74845e-06, 0, -24, 0, 40, 0, 40, 0, -1.04907e-06, -61.6614, 0.793837, 12.7769)
+script = ExtResource("8_fj3t6")
+is_manual_control = false
+metadata/Speed = 0.0
+
+[node name="PiCar" parent="CarObject" instance=ExtResource("8_q3755")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="Capteurs" type="Node3D" parent="CarObject"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.044, -0.204966)
+
+[node name="capteur1" type="RayCast3D" parent="CarObject/Capteurs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.018, 0, 0)
+debug_shape_custom_color = Color(0, 1, 0.298039, 1)
+debug_shape_thickness = 1
+
+[node name="capteurOb" type="RayCast3D" parent="CarObject/Capteurs"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.0446958, 0)
+target_position = Vector3(0, -1.5, 0)
+debug_shape_custom_color = Color(0, 1, 0.298039, 1)
+debug_shape_thickness = 1
+
+[node name="capteur2" type="RayCast3D" parent="CarObject/Capteurs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.018, 0, 0)
+debug_shape_custom_color = Color(0, 1, 0.298039, 1)
+debug_shape_thickness = 1
+
+[node name="capteur3" type="RayCast3D" parent="CarObject/Capteurs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.72529e-09, 0, 0)
+debug_shape_custom_color = Color(0, 1, 0.298039, 1)
+debug_shape_thickness = 1
+
+[node name="capteur4" type="RayCast3D" parent="CarObject/Capteurs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.036, 0, 0)
+debug_shape_custom_color = Color(0, 1, 0.298039, 1)
+debug_shape_thickness = 1
+
+[node name="capteur5" type="RayCast3D" parent="CarObject/Capteurs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.036, 0, 0)
+debug_shape_custom_color = Color(0, 1, 0.298039, 1)
+debug_shape_thickness = 1
