@@ -250,6 +250,25 @@ func backwardsCase():
 	twoLastStates.insert(0, info)
 	if twoLastStates.size() > 3:
 		twoLastStates.pop_back()
+		
+	if !courseEnded && courseStarted:
+		#cas ou la ligne est au milieu
+		if (info == [false, false, true, false, false]):
+			setDesiredSpeed(-0.3)
+			setDesiredSteering(0.07)
+			lineNotFound = false
+			
+		#cas ou on se prepare a entrer dans une courbe vers la gauche
+		elif (info == [false, true, false, false, false]):
+			setDesiredSpeed(0.25)
+			setDesiredSteering(0.15)
+			lineNotFound = false
+			
+		#cas ou on se prepare a entrer dans une courbe vers la gauche
+		elif (info == [false, false, false, true, false]):
+			setDesiredSpeed(0.25)
+			setDesiredSteering(-0.15)
+			lineNotFound = false
 	
 	if twoLastStates == [[true, true, true, true, true],[true, true, true, true, true],[true, true, true, true, true]] && !courseStarted:
 		courseStarted = true
