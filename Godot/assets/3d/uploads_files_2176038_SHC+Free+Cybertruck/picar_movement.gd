@@ -4,7 +4,7 @@ var vector
 @export var currentSpeed: float
 @export var desiredSpeed: float
 var acceleration = 0.7
-var friction = 1.5
+var friction = 2.5
 var maxSpeed = 0.5
 
 var wheel_base = 0.13
