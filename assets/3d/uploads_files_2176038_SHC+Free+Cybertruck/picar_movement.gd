@@ -20,7 +20,7 @@ var capteurG: RayCast3D
 var capteurD: RayCast3D
 var capteurOB: RayCast3D
 
-var thonking
+var thonking = "🙂"
 
 @export var movement_vector: Vector3 = Vector3.ZERO
 @export var is_manual_control: bool = true
@@ -31,12 +31,15 @@ var twoLastStates = [null, null]
 var courseEnded: bool = false
 var lineNotFound: bool = true
 
+var isBackwardsCase: bool = false
+
 var jsonSensorReadFilePath = "/home/pi/sensors.json"
 var jsonSensorWriteFilePath = "/home/pi/godot_out.json"
 var lastJsonData
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	isBackwardsCase = getIsBackwardsCaseJson()
 	capteurCD = $Capteurs/capteur1
 	capteurCG = $Capteurs/capteur2
 	capteurC = $Capteurs/capteur3
@@ -53,28 +56,31 @@ func _physics_process(delta: float):
 	if is_manual_control:
 		get_input()
 	else:
-		print("thonking:", thonking)
-		if getJsonObstacleInfo() < 15 && getJsonObstacleInfo() != 0 || avoidingObstacle:
-			avoidObstacle()
+		if isBackwardsCase:
+			print("THIS IS THE BACKWARDS CASE")
 			steer_direction = lerp(steer_direction, desiredSteering * steering_angle, steeringSpeed * delta)
-		elif !avoidingObstacle:
-			lineFollower()
-			#followbackwards()
-			steer_direction = lerp(steer_direction, desiredSteering * steering_angle, steeringSpeed * delta)
+		else:
+			print("thonking:", thonking)
+			if getJsonObstacleInfo() < 15 && getJsonObstacleInfo() != 0 || avoidingObstacle:
+				avoidObstacle()
+				steer_direction = lerp(steer_direction, desiredSteering * steering_angle, steeringSpeed * delta)
+			elif !avoidingObstacle:
+				lineFollower()
+				steer_direction = lerp(steer_direction, desiredSteering * steering_angle, steeringSpeed * delta)
 	calculate_steering(delta)
 	calculate_acceleration(delta)
 	saveState()
 	
-	movement_vector = Vector3.FORWARD * currentSpeed
+	#movement_vector = Vector3.FORWARD * currentSpeed
 	
-	translate(movement_vector * delta)
+	#translate(movement_vector * delta)
 
 func get_input():
 	var drive_input := Input.get_joy_axis(0, JOY_AXIS_TRIGGER_RIGHT) - Input.get_joy_axis(0, JOY_AXIS_TRIGGER_LEFT)
 	var turn_input := Input.get_joy_axis(0, JOY_AXIS_LEFT_X)
 	steer_direction = turn_input * steering_angle
 	desiredSpeed = drive_input
-	
+
 func calculate_acceleration(delta):
 	if (desiredSpeed != 0):
 		currentSpeed = lerp(currentSpeed, desiredSpeed * maxSpeed, acceleration * delta)
@@ -100,13 +106,13 @@ func setDesiredSpeed(_desiredSpeed: float):
 
 func setDesiredSteering(_desiredSteering: float):
 	desiredSteering = _desiredSteering
-	#if !avoidingObstacle:
-		#if (desiredSteering > 0):
-			#setThonking("🫨")
-		#elif(desiredSteering < 0):
-			#setThonking("🫨")
-		#else:
-			#setThonking("🙂")
+	if !avoidingObstacle:
+		if (desiredSteering > 0):
+			setThonking("🫨")
+		elif(desiredSteering < 0):
+			setThonking("🫨")
+		else:
+			setThonking("🙂")
 
 func getCapteurInfo():
 	var info = [capteurG.is_colliding(), 
@@ -126,6 +132,9 @@ func getCapteurObstacleInfo():
 
 func getJsonObstacleInfo():
 	return getJsonInfo().get("distance")
+
+func getIsBackwardsCaseJson():
+	return getJsonInfo().get("isBackwardsCase")
 
 func getJsonLineInfo():
 	var lineData = getJsonInfo().get("line")
@@ -149,8 +158,6 @@ func getJsonInfo():
 
 func lineFollower():
 	var info = getJsonLineInfo()
-
-	print("line:", info)
 	
 	twoLastStates.insert(0, info)
 	if twoLastStates.size() > 3:
@@ -216,17 +223,17 @@ func lineFollower():
 			setDesiredSteering(0)
 		
 		#cas ou on a un angle droit vers la gauche
-		elif (twoLastStates == [[true, true, true, false, false], [true, true, true, false, false]]):
+		elif (twoLastStates == [[true, true, true, false, false], [true, true, true, false, false], [true, true, true, false, false]]):
 			setDesiredSpeed(0.1)
 			setDesiredSteering(-0.8)
 		
 		#cas ou on a un angle droit vers la droite
-		elif (twoLastStates == [[false, false, true, true, true], [false, false, true, true, true]]):
+		elif (twoLastStates == [[false, false, true, true, true], [false, false, true, true, true], [false, false, true, true, true]]):
 			setDesiredSpeed(0.1)
 			setDesiredSteering(1)
 			
 		# T est detecte
-		elif (twoLastStates == [[true, true, false, true, true], [true, true, false, true, true], [false, false, true, false, false]]):
+		elif (twoLastStates == [[true, true, true, true, true], [true, true, true, true, true], [true, true, true, true, true]]):
 			setDesiredSpeed(0)
 			setDesiredSteering(0)
 			courseEnded = true
