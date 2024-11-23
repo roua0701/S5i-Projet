@@ -256,7 +256,7 @@ func backwardsCase():
 		setDesiredSpeed(-0.3)
 		setDesiredSteering(0)
 		setThonking("initiating ass movement")
-	elif twoLastStates == [[false, false, false, false, false] ,[true, true, true, true, true],[true, true, true, true, true]] && courseStarted && !courseEnded:
+	elif twoLastStates == [[false, false, false, false, false] ,[false, false, false, false, false],[false, false, false, false, false]] && courseStarted && !courseEnded:
 		courseEnded = true
 		setDesiredSpeed(0)
 		setDesiredSteering(0)
