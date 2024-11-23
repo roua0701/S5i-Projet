@@ -271,11 +271,12 @@ func backwardsCase():
 			lineNotFound = false
 	
 	if twoLastStates == [[true, true, true, true, true],[true, true, true, true, true],[true, true, true, true, true]] && !courseStarted:
-		courseStarted = true
+		if twoLastStates != [[true, true, true, true, true],[true, true, true, true, true],[true, true, true, true, true]]:
+			courseStarted = true
 		setDesiredSpeed(-0.3)
 		setDesiredSteering(0.07)
 		setThonking("initiating ass movement")
-	elif twoLastStates == [[false, false, false, false, false] ,[false, false, false, false, false],[false, false, false, false, false]] && courseStarted && !courseEnded:
+	elif twoLastStates == [[true, true, true, true, true],[true, true, true, true, true],[true, true, true, true, true]] && courseStarted && !courseEnded:
 		courseEnded = true
 		setDesiredSpeed(0)
 		setDesiredSteering(0)
