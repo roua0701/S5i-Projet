@@ -1,2 +1,9 @@
 res://main.tscn
 res://assets/3d/uploads_files_2176038_SHC+Free+Cybertruck/picar_movement.gd
+res://camManager.gd
+res://capteurs.gd
+res://debug_draw_3d.gd
+res://debug_overlay.gd
+res://Draw3D.gd
+res://moving_obstacle.gd
+res://spawn_manager.gd
