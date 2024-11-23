@@ -27,11 +27,12 @@ var thonking = "🙂"
 
 var avoidingObstacle = false
 var step = 0
-var twoLastStates = [null, null]
+var twoLastStates = [null, null, null]
 var courseEnded: bool = false
 var lineNotFound: bool = true
 
 var isBackwardsCase: bool = false
+var courseStarted: bool = false
 
 var jsonSensorReadFilePath = "/home/pi/sensors.json"
 var jsonSensorWriteFilePath = "/home/pi/godot_out.json"
@@ -61,9 +62,10 @@ func _physics_process(delta: float):
 	else:
 		if isBackwardsCase:
 			print("THIS IS THE BACKWARDS CASE")
+			backwardsCase()
 			steer_direction = lerp(steer_direction, desiredSteering * steering_angle, steeringSpeed * delta)
 		else:
-			print("thonking:", isBackwardsCase)
+			print("thonking:", thonking)
 			if getJsonObstacleInfo() < 15 && getJsonObstacleInfo() != 0 || avoidingObstacle:
 				avoidObstacle()
 				steer_direction = lerp(steer_direction, desiredSteering * steering_angle, steeringSpeed * delta)
@@ -242,68 +244,23 @@ func lineFollower():
 			courseEnded = true
 			setThonking("🥳")
 
-func followbackwards():
-	var info = getCapteurInfo()
-	print(info)
+func backwardsCase():
+	var info = getJsonLineInfo()
 	
-	#cas ou la ligne est au milieu
-	if (info == [false, false, true, false, false]):
-		setDesiredSpeed(-0.45)
+	twoLastStates.insert(0, info)
+	if twoLastStates.size() > 3:
+		twoLastStates.pop_back()
+	
+	if twoLastStates == [[true, true, true, true, true],[true, true, true, true, true],[true, true, true, true, true]] && !courseStarted:
+		courseStarted = true
+		setDesiredSpeed(-0.3)
 		setDesiredSteering(0)
-		
-	#cas ou on se prepare a entrer dans une courbe vers la gauche
-	elif (info == [false, true, true, false, false]):
-		setDesiredSpeed(-0.3)
-		setDesiredSteering(0.25)
-		
-	#cas ou on commence la courbe vers la gauche
-	elif (info == [false, true, false, false, false]):
-		setDesiredSpeed(-0.3)
-		setDesiredSteering(0.5)
-	
-	#cas ou on prepare le gros virage dans la courbe vers la gauche
-	elif (info == [true, true, false, false, false]):
-		setDesiredSpeed(-0.2)
-		setDesiredSteering(0.75)
-		
-	#cas ou on est dans la courbe vers la gauche
-	elif (info == [true, false, false, false, false]):
-		setDesiredSpeed(-0.2)
-		setDesiredSteering(1)
-		
-	#cas ou on se prepare a entrer dans une courbe vers la droite
-	elif (info == [false, false, true, true, false]):
-		setDesiredSpeed(-0.3)
-		setDesiredSteering(-0.25)
-	
-	#cas ou on prepare le gros virage dans la courbe vers la droite
-	elif (info == [false, false, false, true, true]):
-		setDesiredSpeed(-0.2)
-		setDesiredSteering(-0.75)
-	
-	#cas ou on commence la courbe vers la droite
-	elif (info == [false, false, false, true, false]):
-		setDesiredSpeed(-0.3)
-		setDesiredSteering(-0.5)
-	
-	#cas ou on est dans la courbe vers la droite
-	elif (info == [false, false, false, false, true]):
-		setDesiredSpeed(-0.2)
-		setDesiredSteering(-1)
-		
-	# T est detecte
-	elif (info == [true, true, true, true, true]):
+		setThonking("initiating ass movement")
+	elif twoLastStates == [[true, true, true, true, true],[true, true, true, true, true],[true, true, true, true, true]] && courseStarted && !courseEnded:
+		courseEnded = true
 		setDesiredSpeed(0)
 		setDesiredSteering(0)
-	
-	# plus sur le parcours
-	elif (info == [false, false, false, false, false]):
-		setDesiredSpeed(0)
-		setDesiredSteering(0)
-		
-	elif (info == [true, true, false, true, true]):
-		setDesiredSpeed(0)
-		setDesiredSteering(0)
+		setThonking("stoppin the booty shakin")
 
 func avoidObstacle():
 	avoidingObstacle = true
