@@ -248,6 +248,8 @@ func lineFollower():
 func backwardsCase():
 	var info = getJsonLineInfo()
 	
+	print(info)
+	
 	twoLastStates.insert(0, info)
 	if twoLastStates.size() > 3:
 		twoLastStates.pop_back()
@@ -262,13 +264,13 @@ func backwardsCase():
 		#cas ou on se prepare a entrer dans une courbe vers la gauche
 		elif (info == [false, true, false, false, false]):
 			setDesiredSpeed(-0.25)
-			setDesiredSteering(0.15)
+			setDesiredSteering(0.25)
 			lineNotFound = false
 			
 		#cas ou on se prepare a entrer dans une courbe vers la gauche
 		elif (info == [false, false, false, true, false]):
 			setDesiredSpeed(-0.25)
-			setDesiredSteering(-0.15)
+			setDesiredSteering(-0.25)
 			lineNotFound = false
 	
 	if twoLastStates == [[true, true, true, true, true],[true, true, true, true, true],[true, true, true, true, true]] && !courseStarted:
