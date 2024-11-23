@@ -33,6 +33,7 @@ var lineNotFound: bool = true
 
 var isBackwardsCase: bool = false
 var courseStarted: bool = false
+var isGoneFromT: bool = false
 
 var jsonSensorReadFilePath = "/home/pi/sensors.json"
 var jsonSensorWriteFilePath = "/home/pi/godot_out.json"
@@ -274,7 +275,8 @@ func backwardsCase():
 		setDesiredSpeed(-0.3)
 		setDesiredSteering(0.07)
 		setThonking("initiating ass movement")
-	elif twoLastStates != [[true, true, true, true, true],[true, true, true, true, true],[true, true, true, true, true]] && !courseStarted:
+		isGoneFromT = true
+	elif twoLastStates != [[true, true, true, true, true],[true, true, true, true, true],[true, true, true, true, true]] && isGoneFromT && !courseStarted:
 		setThonking("the course has begun")
 		courseStarted = true
 	elif info == [true, true, true, true, true] && courseStarted && !courseEnded:
