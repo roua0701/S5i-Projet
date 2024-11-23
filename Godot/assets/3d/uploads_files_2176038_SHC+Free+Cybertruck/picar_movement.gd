@@ -39,8 +39,6 @@ var lastJsonData
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print(getIsBackwardsCaseJson())
-	isBackwardsCase = getIsBackwardsCaseJson()
 	capteurCD = $Capteurs/capteur1
 	capteurCG = $Capteurs/capteur2
 	capteurC = $Capteurs/capteur3
@@ -61,7 +59,7 @@ func _physics_process(delta: float):
 			print("THIS IS THE BACKWARDS CASE")
 			steer_direction = lerp(steer_direction, desiredSteering * steering_angle, steeringSpeed * delta)
 		else:
-			print("thonking:", thonking)
+			print("thonking:", getIsBackwardsCaseJson())
 			if getJsonObstacleInfo() < 15 && getJsonObstacleInfo() != 0 || avoidingObstacle:
 				avoidObstacle()
 				steer_direction = lerp(steer_direction, desiredSteering * steering_angle, steeringSpeed * delta)
