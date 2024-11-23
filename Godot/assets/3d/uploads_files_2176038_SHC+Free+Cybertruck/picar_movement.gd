@@ -258,7 +258,7 @@ func backwardsCase():
 		#cas ou la ligne est au milieu
 		if (info == [false, false, true, false, false]):
 			setDesiredSpeed(-0.2)
-			setDesiredSteering(0.085)
+			setDesiredSteering(0.1)
 			lineNotFound = false
 			
 		#cas ou on se prepare a entrer dans une courbe vers la gauche
@@ -275,7 +275,7 @@ func backwardsCase():
 	
 	if twoLastStates == [[true, true, true, true, true],[true, true, true, true, true],[true, true, true, true, true]] && !courseStarted:
 		setDesiredSpeed(-0.3)
-		setDesiredSteering(0.085)
+		setDesiredSteering(0.1)
 		setThonking("initiating ass movement")
 		isGoneFromT = true
 	elif twoLastStates != [[true, true, true, true, true],[true, true, true, true, true],[true, true, true, true, true]] && isGoneFromT && !courseStarted:
