@@ -61,7 +61,6 @@ func _physics_process(delta: float):
 		get_input()
 	else:
 		if isBackwardsCase:
-			print("THIS IS THE BACKWARDS CASE")
 			backwardsCase()
 			steer_direction = lerp(steer_direction, desiredSteering * steering_angle, steeringSpeed * delta)
 		else:
