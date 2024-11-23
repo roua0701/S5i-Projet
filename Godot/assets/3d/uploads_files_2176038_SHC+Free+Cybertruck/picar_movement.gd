@@ -4,7 +4,7 @@ var vector
 @export var currentSpeed: float
 @export var desiredSpeed: float
 var acceleration = 0.7
-var friction = 0.9
+var friction = 1.5
 var maxSpeed = 0.5
 
 var wheel_base = 0.13
@@ -257,20 +257,20 @@ func backwardsCase():
 	if !courseEnded && courseStarted:
 		#cas ou la ligne est au milieu
 		if (info == [false, false, true, false, false]):
-			setDesiredSpeed(-0.3)
+			setDesiredSpeed(-0.2)
 			setDesiredSteering(0.07)
 			lineNotFound = false
 			
 		#cas ou on se prepare a entrer dans une courbe vers la gauche
 		elif (info == [false, true, false, false, false]):
-			setDesiredSpeed(-0.25)
-			setDesiredSteering(0.25)
+			setDesiredSpeed(-0.15)
+			setDesiredSteering(0.4)
 			lineNotFound = false
 			
 		#cas ou on se prepare a entrer dans une courbe vers la gauche
 		elif (info == [false, false, false, true, false]):
-			setDesiredSpeed(-0.25)
-			setDesiredSteering(-0.25)
+			setDesiredSpeed(-0.15)
+			setDesiredSteering(-0.4)
 			lineNotFound = false
 	
 	if twoLastStates == [[true, true, true, true, true],[true, true, true, true, true],[true, true, true, true, true]] && !courseStarted:
