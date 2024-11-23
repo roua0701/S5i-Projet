@@ -261,13 +261,13 @@ func backwardsCase():
 			
 		#cas ou on se prepare a entrer dans une courbe vers la gauche
 		elif (info == [false, true, false, false, false]):
-			setDesiredSpeed(0.25)
+			setDesiredSpeed(-0.25)
 			setDesiredSteering(0.15)
 			lineNotFound = false
 			
 		#cas ou on se prepare a entrer dans une courbe vers la gauche
 		elif (info == [false, false, false, true, false]):
-			setDesiredSpeed(0.25)
+			setDesiredSpeed(-0.25)
 			setDesiredSteering(-0.15)
 			lineNotFound = false
 	
