@@ -178,29 +178,29 @@ func lineFollower():
 				setDesiredSteering(0.2)
 			else:
 				setDesiredSteering(0.09)
+			justAvoidedObstacle = false
 			lineNotFound = false
 			
 		#cas ou on se prepare a entrer dans une courbe vers la gauche
-		elif (info == [false, true, true, false, false]):
+		elif (info == [false, true, true, false, false] && !justAvoidedObstacle):
 			setDesiredSpeed(0.3)
 			setDesiredSteering(-0.25)
 			lineNotFound = false
 			
 		#cas ou on commence la courbe vers la gauche
-		elif (info == [false, true, false, false, false]):
+		elif (info == [false, true, false, false, false] && !justAvoidedObstacle):
 			setDesiredSpeed(0.3)
 			setDesiredSteering(-0.5)
-			justAvoidedObstacle = false
 			lineNotFound = false
 		
 		#cas ou on prepare le gros virage dans la courbe vers la gauche
-		elif (info == [true, true, false, false, false]):
+		elif (info == [true, true, false, false, false] && !justAvoidedObstacle):
 			setDesiredSpeed(0.2)
 			setDesiredSteering(-0.75)
 			lineNotFound = false
 			
 		#cas ou on est dans la courbe vers la gauche
-		elif (info == [true, false, false, false, false]):
+		elif (info == [true, false, false, false, false] && !justAvoidedObstacle):
 			setDesiredSpeed(0.2)
 			setDesiredSteering(-1)
 			lineNotFound = false
@@ -220,7 +220,10 @@ func lineFollower():
 		#cas ou on commence la courbe vers la droite
 		elif (info == [false, false, false, true, false]):
 			setDesiredSpeed(0.3)
-			setDesiredSteering(0.5)
+			if (justAvoidedObstacle):
+				setDesiredSteering(0.7)
+			else:
+				setDesiredSteering(0.5)
 			lineNotFound = false
 		
 		#cas ou on est dans la courbe vers la droite
