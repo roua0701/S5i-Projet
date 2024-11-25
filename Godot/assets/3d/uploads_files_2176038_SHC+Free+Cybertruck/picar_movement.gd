@@ -175,8 +175,8 @@ func lineFollower():
 		if (info == [false, false, true, false, false]):
 			setDesiredSpeed(0.45)
 			if justAvoidedObstacle:
-				setDesiredSteering(0.2)
-				await get_tree().create_timer(1.25).timeout
+				setDesiredSteering(0.5)
+				await get_tree().create_timer(1.5).timeout
 			else:
 				setDesiredSteering(0.09)
 			justAvoidedObstacle = false
