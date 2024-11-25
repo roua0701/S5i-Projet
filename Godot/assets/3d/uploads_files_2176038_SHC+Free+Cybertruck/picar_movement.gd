@@ -175,7 +175,7 @@ func lineFollower():
 		if (info == [false, false, true, false, false]):
 			setDesiredSpeed(0.45)
 			setDesiredSteering(0)
-			justAvoidedObstacle = true
+			justAvoidedObstacle = false
 			lineNotFound = false
 			
 		#cas ou on se prepare a entrer dans une courbe vers la gauche
