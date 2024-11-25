@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1732378852
+::res://::1732546172
 camManager.gd::GDScript::-1::1732377441::0::1::::<>Node3D<>::
 capteurs.gd::GDScript::-1::1732377441::0::1::::<>Node3D<>::
 debug_draw_3d.gd::GDScript::-1::1732377441::0::1::::<>RefCounted<>::
@@ -7,7 +7,7 @@ debug_overlay.gd::GDScript::-1::1732377441::0::1::::<>RefCounted<>::
 Draw3D.gd::GDScript::-1::1732377441::0::1::::<>Node<>::
 export_presets.cfg::TextFile::-1::1732377441::0::1::::<><>::
 icon.svg::CompressedTexture2D::1374322914596704389::1732377441::1732378858::1::::<><>::
-main.tscn::PackedScene::3150966554309188884::1732377441::0::1::::<><>::res://scripts/main.gd<>res://addons/finite_state_machine/scripts/finite_state_machine.gd<>res://scripts/fsm/NetworkInitState.gd<>res://scripts/fsm/NetworkWaitingState.gd<>res://scripts/fsm/NetworkConnectingState.gd<>res://scripts/fsm/NetworkProcessState.gd<>res://assets/3d/uploads_files_2176038_SHC+Free+Cybertruck/picar_movement.gd<>uid://dhw27gk6nbfgu::::res://assets/3d/uploads_files_2176038_SHC+Free+Cybertruck/SHC Free Cybertruck.blend
+main.tscn::PackedScene::3150966554309188884::1732389568::0::1::::<><>::res://scripts/main.gd<>res://addons/finite_state_machine/scripts/finite_state_machine.gd<>res://scripts/fsm/NetworkInitState.gd<>res://scripts/fsm/NetworkWaitingState.gd<>res://scripts/fsm/NetworkConnectingState.gd<>res://scripts/fsm/NetworkProcessState.gd<>res://assets/3d/uploads_files_2176038_SHC+Free+Cybertruck/picar_movement.gd<>uid://dhw27gk6nbfgu::::res://assets/3d/uploads_files_2176038_SHC+Free+Cybertruck/SHC Free Cybertruck.blend
 moving_obstacle.gd::GDScript::-1::1732377441::0::1::::<>CSGBox3D<>::
 spawn_manager.gd::GDScript::-1::1732377441::0::1::::<>Node3D<>::
 ::res://addons/::1732377441
@@ -18,7 +18,7 @@ README.md::TextFile::-1::1732377441::0::1::::<><>::
 plugin.cfg::TextFile::-1::1732377441::0::1::::<><>::
 plugin.gd::GDScript::-1::1732377441::0::1::::<>EditorPlugin<>::
 readme.md::TextFile::-1::1732377441::0::1::::<><>::
-::res://addons/finite_state_machine/icons/::1732377441
+::res://addons/finite_state_machine/icons/::1732378859
 finite_state_machine.svg::CompressedTexture2D::4888590432077469794::1732377441::1732378859::1::::<><>::
 state_machine_state.svg::CompressedTexture2D::2400681936130987388::1732377441::1732378859::1::::<><>::
 ::res://addons/finite_state_machine/scripts/::1732377441
@@ -29,10 +29,10 @@ camera.gd::GDScript::-1::1732377441::0::1::::FreeLookCamera<>Camera3D<>::
 README.md::TextFile::-1::1732377441::0::1::::<><>::
 ::res://assets/::1732377441
 ::res://assets/3d/::1732377441
-::res://assets/3d/uploads_files_2176038_SHC+Free+Cybertruck/::1732377441
-picar_movement.gd::GDScript::-1::1732377441::0::1::::<>Node3D<>::
+::res://assets/3d/uploads_files_2176038_SHC+Free+Cybertruck/::1732389568
+picar_movement.gd::GDScript::-1::1732389568::0::1::::<>Node3D<>::
 SHC Free Cybertruck.blend::PackedScene::7697697103358556972::1732377441::1732378862::1::::<><>::
-::res://assets/blend/::1732377441
+::res://assets/blend/::1732378861
 parcours.blend::PackedScene::2672271465074343887::1732377441::1732378861::1::::<><>::
 plaquette.blend::PackedScene::8265332081679881569::1732377441::1732378861::1::::<><>::
 plaquette.gd::GDScript::-1::1732377441::0::1::::<>Node3D<>::
@@ -41,7 +41,7 @@ plaquette.gd::GDScript::-1::1732377441::0::1::::<>Node3D<>::
 ::res://assets/textures/kenney-prototype-textures-db6622fbe90621eed70a0b417ae8d97281f45e6c/addons/::1732377441
 ::res://assets/textures/kenney-prototype-textures-db6622fbe90621eed70a0b417ae8d97281f45e6c/addons/kenney_prototype_textures/::1732377441
 LICENSE.txt::TextFile::-1::1732377441::0::1::::<><>::
-::res://assets/textures/kenney-prototype-textures-db6622fbe90621eed70a0b417ae8d97281f45e6c/addons/kenney_prototype_textures/dark/::1732377441
+::res://assets/textures/kenney-prototype-textures-db6622fbe90621eed70a0b417ae8d97281f45e6c/addons/kenney_prototype_textures/dark/::1732378859
 texture_01.png::CompressedTexture2D::2848977343395755234::1732377441::1732378859::1::::<><>::
 texture_02.png::CompressedTexture2D::8093401028745778518::1732377441::1732378859::1::::<><>::
 texture_03.png::CompressedTexture2D::4787557727097691113::1732377441::1732378859::1::::<><>::
@@ -55,7 +55,7 @@ texture_10.png::CompressedTexture2D::7926511794504464522::1732377441::1732378859
 texture_11.png::CompressedTexture2D::3130412214683991036::1732377441::1732378859::1::::<><>::
 texture_12.png::CompressedTexture2D::5907055423831906456::1732377441::1732378859::1::::<><>::
 texture_13.png::CompressedTexture2D::6155808157887112202::1732377441::1732378859::1::::<><>::
-::res://assets/textures/kenney-prototype-textures-db6622fbe90621eed70a0b417ae8d97281f45e6c/addons/kenney_prototype_textures/green/::1732377441
+::res://assets/textures/kenney-prototype-textures-db6622fbe90621eed70a0b417ae8d97281f45e6c/addons/kenney_prototype_textures/green/::1732378859
 texture_01.png::CompressedTexture2D::6375367740719699241::1732377441::1732378859::1::::<><>::
 texture_02.png::CompressedTexture2D::5219398519791729766::1732377441::1732378859::1::::<><>::
 texture_03.png::CompressedTexture2D::6554997565750654566::1732377441::1732378859::1::::<><>::
@@ -69,7 +69,7 @@ texture_10.png::CompressedTexture2D::197552647612728259::1732377441::1732378859:
 texture_11.png::CompressedTexture2D::398931893607742090::1732377441::1732378859::1::::<><>::
 texture_12.png::CompressedTexture2D::8025499479607668052::1732377441::1732378859::1::::<><>::
 texture_13.png::CompressedTexture2D::3129523626421390887::1732377441::1732378859::1::::<><>::
-::res://assets/textures/kenney-prototype-textures-db6622fbe90621eed70a0b417ae8d97281f45e6c/addons/kenney_prototype_textures/light/::1732377441
+::res://assets/textures/kenney-prototype-textures-db6622fbe90621eed70a0b417ae8d97281f45e6c/addons/kenney_prototype_textures/light/::1732378859
 texture_01.png::CompressedTexture2D::2739570028731951751::1732377441::1732378859::1::::<><>::
 texture_02.png::CompressedTexture2D::5978003298916119680::1732377441::1732378859::1::::<><>::
 texture_03.png::CompressedTexture2D::7304199467551837392::1732377441::1732378859::1::::<><>::
@@ -83,7 +83,7 @@ texture_10.png::CompressedTexture2D::73218884525517005::1732377441::1732378859::
 texture_11.png::CompressedTexture2D::5743355280604135750::1732377441::1732378859::1::::<><>::
 texture_12.png::CompressedTexture2D::8585761732932690932::1732377441::1732378859::1::::<><>::
 texture_13.png::CompressedTexture2D::8746703091254229457::1732377441::1732378858::1::::<><>::
-::res://assets/textures/kenney-prototype-textures-db6622fbe90621eed70a0b417ae8d97281f45e6c/addons/kenney_prototype_textures/orange/::1732377441
+::res://assets/textures/kenney-prototype-textures-db6622fbe90621eed70a0b417ae8d97281f45e6c/addons/kenney_prototype_textures/orange/::1732378858
 texture_01.png::CompressedTexture2D::3108506391815018952::1732377441::1732378858::1::::<><>::
 texture_02.png::CompressedTexture2D::2419546548443420116::1732377441::1732378858::1::::<><>::
 texture_03.png::CompressedTexture2D::5877933847881809906::1732377441::1732378858::1::::<><>::
@@ -97,7 +97,7 @@ texture_10.png::CompressedTexture2D::2329554310886353839::1732377441::1732378858
 texture_11.png::CompressedTexture2D::3494506398736968031::1732377441::1732378858::1::::<><>::
 texture_12.png::CompressedTexture2D::2933521179758955016::1732377441::1732378858::1::::<><>::
 texture_13.png::CompressedTexture2D::5207204978560585852::1732377441::1732378858::1::::<><>::
-::res://assets/textures/kenney-prototype-textures-db6622fbe90621eed70a0b417ae8d97281f45e6c/addons/kenney_prototype_textures/purple/::1732377441
+::res://assets/textures/kenney-prototype-textures-db6622fbe90621eed70a0b417ae8d97281f45e6c/addons/kenney_prototype_textures/purple/::1732378859
 texture_01.png::CompressedTexture2D::3263152354040611671::1732377441::1732378858::1::::<><>::
 texture_02.png::CompressedTexture2D::3348199955386971655::1732377441::1732378858::1::::<><>::
 texture_03.png::CompressedTexture2D::5731847344419160205::1732377441::1732378858::1::::<><>::
@@ -111,7 +111,7 @@ texture_10.png::CompressedTexture2D::1883248391240579999::1732377441::1732378859
 texture_11.png::CompressedTexture2D::3771912729848167467::1732377441::1732378859::1::::<><>::
 texture_12.png::CompressedTexture2D::7691995198038250770::1732377441::1732378859::1::::<><>::
 texture_13.png::CompressedTexture2D::6821466187950919582::1732377441::1732378859::1::::<><>::
-::res://assets/textures/kenney-prototype-textures-db6622fbe90621eed70a0b417ae8d97281f45e6c/addons/kenney_prototype_textures/red/::1732377441
+::res://assets/textures/kenney-prototype-textures-db6622fbe90621eed70a0b417ae8d97281f45e6c/addons/kenney_prototype_textures/red/::1732378859
 texture_01.png::CompressedTexture2D::5444993823775391164::1732377441::1732378859::1::::<><>::
 texture_02.png::CompressedTexture2D::7866112883278399896::1732377441::1732378858::1::::<><>::
 texture_03.png::CompressedTexture2D::9167254529103111699::1732377441::1732378859::1::::<><>::
@@ -125,7 +125,7 @@ texture_10.png::CompressedTexture2D::5422501412018601162::1732377441::1732378858
 texture_11.png::CompressedTexture2D::1903260425191093542::1732377441::1732378858::1::::<><>::
 texture_12.png::CompressedTexture2D::2600065370105319646::1732377441::1732378858::1::::<><>::
 texture_13.png::CompressedTexture2D::2188697611588498097::1732377441::1732378858::1::::<><>::
-::res://examples_dd3d/::1732377441
+::res://examples_dd3d/::1732378858
 addon_icon.gd::GDScript::-1::1732377441::0::1::::<>Node3D<>::
 addon_icon.tscn::PackedScene::1848058559946837243::1732377441::0::1::::<><>::res://examples_dd3d/addon_icon.gd
 DebugDrawDemoScene.gd::GDScript::-1::1732377441::0::1::::<>Node3D<>::

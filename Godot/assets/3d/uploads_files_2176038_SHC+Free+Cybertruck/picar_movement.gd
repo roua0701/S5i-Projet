@@ -303,9 +303,9 @@ func avoidObstacle():
 			step = 2
 	elif (step == 2):
 		setThonking("🎯")
-		setDesiredSpeed(0.3)
+		setDesiredSpeed(0.4)
 		setDesiredSteering(0.7)
-		await get_tree().create_timer(3.5).timeout
+		await get_tree().create_timer(4).timeout
 		step = 3
 	elif (step == 3):
 		setThonking("✌️")
