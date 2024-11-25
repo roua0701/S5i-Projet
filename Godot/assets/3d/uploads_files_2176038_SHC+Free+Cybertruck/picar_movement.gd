@@ -174,10 +174,8 @@ func lineFollower():
 		#cas ou la ligne est au milieu
 		if (info == [false, false, true, false, false]):
 			setDesiredSpeed(0.45)
-			if justAvoidedObstacle:
-				setDesiredSteering(0.5)
-			else:
-				setDesiredSteering(0.09)
+			setDesiredSteering(0.09)
+			justAvoidedObstacle = false
 			lineNotFound = false
 			
 		#cas ou on se prepare a entrer dans une courbe vers la gauche
@@ -219,17 +217,13 @@ func lineFollower():
 		#cas ou on commence la courbe vers la droite
 		elif (info == [false, false, false, true, false] && !justAvoidedObstacle):
 			setDesiredSpeed(0.3)
-			if (justAvoidedObstacle):
-				setDesiredSteering(0.85)
-			else:
-				setDesiredSteering(0.5)
+			setDesiredSteering(0.5)
 			lineNotFound = false
 		
 		#cas ou on est dans la courbe vers la droite
 		elif (info == [false, false, false, false, true]):
 			setDesiredSpeed(0.2)
 			setDesiredSteering(1)
-			justAvoidedObstacle = false
 			lineNotFound = false
 		
 		elif (info == [false, false, false, false, false] && lineNotFound):
