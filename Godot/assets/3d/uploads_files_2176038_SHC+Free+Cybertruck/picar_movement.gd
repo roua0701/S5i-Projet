@@ -308,7 +308,7 @@ func avoidObstacle():
 		if (getJsonObstacleInfo() > 100):
 			await get_tree().create_timer(1.5).timeout
 			setDesiredSpeed(0.4)
-			setDesiredSteering(0.7)
+			setDesiredSteering(0.07)
 			await get_tree().create_timer(3).timeout
 			step = 3
 	elif (step == 3):
