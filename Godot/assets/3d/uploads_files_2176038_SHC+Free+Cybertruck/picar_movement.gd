@@ -314,7 +314,7 @@ func avoidObstacle():
 			step = 3
 	elif (step == 3):
 		setThonking("✌️")
-		setDesiredSpeed(0.4)
+		setDesiredSpeed(0.8)
 		setDesiredSteering(-0.75) #-0.55
 		justAvoidedObstacle = true
 		if (getJsonLineInfo() != [false, false, false, false, false]):
