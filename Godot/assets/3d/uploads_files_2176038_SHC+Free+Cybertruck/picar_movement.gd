@@ -34,6 +34,7 @@ var lineNotFound: bool = true
 var isBackwardsCase: bool = false
 var courseStarted: bool = false
 var isGoneFromT: bool = false
+var justAvoidedObstacle: bool = false
 
 var jsonSensorReadFilePath = "/home/pi/sensors.json"
 var jsonSensorWriteFilePath = "/home/pi/godot_out.json"
@@ -174,28 +175,29 @@ func lineFollower():
 		if (info == [false, false, true, false, false]):
 			setDesiredSpeed(0.45)
 			setDesiredSteering(0)
+			justAvoidedObstacle = true
 			lineNotFound = false
 			
 		#cas ou on se prepare a entrer dans une courbe vers la gauche
-		elif (info == [false, true, true, false, false]):
+		elif (info == [false, true, true, false, false] && !justAvoidedObstacle):
 			setDesiredSpeed(0.3)
 			setDesiredSteering(-0.25)
 			lineNotFound = false
 			
 		#cas ou on commence la courbe vers la gauche
-		elif (info == [false, true, false, false, false]):
+		elif (info == [false, true, false, false, false] && !justAvoidedObstacle):
 			setDesiredSpeed(0.3)
 			setDesiredSteering(-0.5)
 			lineNotFound = false
 		
 		#cas ou on prepare le gros virage dans la courbe vers la gauche
-		elif (info == [true, true, false, false, false]):
+		elif (info == [true, true, false, false, false] && !justAvoidedObstacle):
 			setDesiredSpeed(0.2)
 			setDesiredSteering(-0.75)
 			lineNotFound = false
 			
 		#cas ou on est dans la courbe vers la gauche
-		elif (info == [true, false, false, false, false]):
+		elif (info == [true, false, false, false, false] && !justAvoidedObstacle):
 			setDesiredSpeed(0.2)
 			setDesiredSteering(-1)
 			lineNotFound = false
@@ -314,6 +316,7 @@ func avoidObstacle():
 		setThonking("✌️")
 		setDesiredSpeed(0.4)
 		setDesiredSteering(-0.55)
+		justAvoidedObstacle = true
 		if (getJsonLineInfo() != [false, false, false, false, false]):
 			setDesiredSpeed(0)
 			await get_tree().create_timer(0.5).timeout
