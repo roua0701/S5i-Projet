@@ -173,7 +173,7 @@ func lineFollower():
 		#cas ou la ligne est au milieu
 		if (info == [false, false, true, false, false]):
 			setDesiredSpeed(0.45)
-			setDesiredSteering(0.08)
+			setDesiredSteering(0)
 			lineNotFound = false
 			
 		#cas ou on se prepare a entrer dans une courbe vers la gauche
@@ -313,7 +313,7 @@ func avoidObstacle():
 	elif (step == 3):
 		setThonking("✌️")
 		setDesiredSpeed(0.4)
-		setDesiredSteering(-0.35)
+		setDesiredSteering(-0.45)
 		if (getJsonLineInfo() != [false, false, false, false, false]):
 			setDesiredSpeed(0)
 			await get_tree().create_timer(0.5).timeout
