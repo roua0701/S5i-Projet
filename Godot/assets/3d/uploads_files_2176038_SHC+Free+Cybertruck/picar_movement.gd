@@ -173,7 +173,7 @@ func lineFollower():
 		#cas ou la ligne est au milieu
 		if (info == [false, false, true, false, false]):
 			setDesiredSpeed(0.45)
-			setDesiredSteering(0)
+			setDesiredSteering(0.1)
 			lineNotFound = false
 			
 		#cas ou on se prepare a entrer dans une courbe vers la gauche
