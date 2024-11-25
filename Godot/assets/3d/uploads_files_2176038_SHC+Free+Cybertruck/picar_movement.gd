@@ -173,7 +173,7 @@ func lineFollower():
 		#cas ou la ligne est au milieu
 		if (info == [false, false, true, false, false]):
 			setDesiredSpeed(0.45)
-			setDesiredSteering(0.1)
+			setDesiredSteering(0.08)
 			lineNotFound = false
 			
 		#cas ou on se prepare a entrer dans une courbe vers la gauche
@@ -299,7 +299,7 @@ func avoidObstacle():
 		setThonking("🫥")
 		setDesiredSteering(0)
 		setDesiredSpeed(-0.2)
-		if (getJsonObstacleInfo() > 15):
+		if (getJsonObstacleInfo() > 10):
 			step = 2
 	elif (step == 2):
 		setThonking("🎯")
