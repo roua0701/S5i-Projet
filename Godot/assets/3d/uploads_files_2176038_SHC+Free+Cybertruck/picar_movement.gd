@@ -310,7 +310,7 @@ func avoidObstacle():
 	elif (step == 3):
 		setThonking("✌️")
 		setDesiredSpeed(0.3)
-		setDesiredSteering(-0.25)
+		setDesiredSteering(-0.4)
 		if (getJsonLineInfo() != [false, false, false, false, false]):
 			setDesiredSpeed(0)
 			await get_tree().create_timer(0.5).timeout
