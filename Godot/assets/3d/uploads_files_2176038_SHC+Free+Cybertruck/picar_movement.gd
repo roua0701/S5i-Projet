@@ -69,7 +69,7 @@ func _physics_process(delta: float):
 			steer_direction = lerp(steer_direction, desiredSteering * steering_angle, steeringSpeed * delta)
 		else:
 			print("thonking:", thonking)
-			if getJsonObstacleInfo() < 15 && getJsonObstacleInfo() != 0 || avoidingObstacle:
+			if getJsonObstacleInfo() < 12 && getJsonObstacleInfo() != 0 || avoidingObstacle:
 				avoidObstacle()
 				steer_direction = lerp(steer_direction, desiredSteering * steering_angle, steeringSpeed * delta)
 			elif !avoidingObstacle:
@@ -302,7 +302,7 @@ func avoidObstacle():
 		setThonking("🫥")
 		setDesiredSteering(0.09)
 		setDesiredSpeed(-0.2)
-		if (getJsonObstacleInfo() > 20):
+		if (getJsonObstacleInfo() > 22):
 			setDesiredSpeed(0)
 			await get_tree().create_timer(2).timeout
 			step = 2
@@ -316,7 +316,7 @@ func avoidObstacle():
 			setDesiredSpeed(0.4)
 			setDesiredSteering(0.07)
 			setThonking('HALLELUJAH')
-			await get_tree().create_timer(3).timeout #2.75
+			await get_tree().create_timer(3.75).timeout #2.75
 			step = 3
 	elif (step == 3):
 		isStraight = false
