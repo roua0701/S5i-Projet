@@ -302,6 +302,8 @@ func avoidObstacle():
 		setDesiredSteering(0.09)
 		setDesiredSpeed(-0.2)
 		if (getJsonObstacleInfo() > 13):
+			setDesiredSpeed(0)
+			await get_tree().create_timer(0.5).timeout
 			step = 2
 	elif (step == 2):
 		setThonking("🎯")
