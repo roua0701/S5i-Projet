@@ -311,7 +311,7 @@ func avoidObstacle():
 			setThonking("🎯")
 			setDesiredSpeed(0.5)
 			setDesiredSteering(0.7)
-		elif (getJsonObstacleInfo() > 100):
+		if (getJsonObstacleInfo() > 100):
 			isStraight = true
 			setDesiredSpeed(0.4)
 			setDesiredSteering(0.07)
