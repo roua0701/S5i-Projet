@@ -35,6 +35,7 @@ var isBackwardsCase: bool = false
 var courseStarted: bool = false
 var isGoneFromT: bool = false
 var justAvoidedObstacle: bool = false
+var isStraight: bool = false
 
 var jsonSensorReadFilePath = "/home/pi/sensors.json"
 var jsonSensorWriteFilePath = "/home/pi/godot_out.json"
@@ -306,16 +307,19 @@ func avoidObstacle():
 			await get_tree().create_timer(2).timeout
 			step = 2
 	elif (step == 2):
-		setThonking("🎯")
-		setDesiredSpeed(0.5)
-		setDesiredSteering(0.7)
-		if (getJsonObstacleInfo() > 100):
+		if (!isStraight):
+			setThonking("🎯")
+			setDesiredSpeed(0.5)
+			setDesiredSteering(0.7)
+		elif (getJsonObstacleInfo() > 100):
+			isStraight = true
 			setDesiredSpeed(0.4)
 			setDesiredSteering(0.07)
 			setThonking('HALLELUJAH')
 			await get_tree().create_timer(3.75).timeout #2.75
 			step = 3
 	elif (step == 3):
+		isStraight = false
 		setThonking("✌️")
 		setDesiredSpeed(0.8)
 		setDesiredSteering(-0.75) #-0.55
