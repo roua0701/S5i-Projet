@@ -39,6 +39,8 @@ var justAvoidedObstacleRight: bool = false
 var justAvoidedObstacleLeft: bool = false
 var isStraight: bool = false
 
+var distanceToAvoidObstacle:int = 80
+
 var jsonSensorReadFilePath = "/home/pi/sensors.json"
 var jsonSensorWriteFilePath = "/home/pi/godot_out.json"
 var lastJsonData
@@ -411,7 +413,7 @@ func avoidObstacleDroite():
 			setThonking("🎯")
 			setDesiredSpeed(0.5)
 			setDesiredSteering(0.7)
-		if (getJsonObstacleInfo() > 100):
+		if (getJsonObstacleInfo() > distanceToAvoidObstacle):
 			isStraight = true
 			setDesiredSpeed(0.4)
 			setDesiredSteering(0.07)
@@ -451,7 +453,7 @@ func avoidObstacleGauche():
 			setThonking("🎯")
 			setDesiredSpeed(0.5)
 			setDesiredSteering(-0.7)
-		if (getJsonObstacleInfo() > 100):
+		if (getJsonObstacleInfo() > distanceToAvoidObstacle):
 			isStraight = true
 			setDesiredSpeed(0.4)
 			setDesiredSteering(0.07)
