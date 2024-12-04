@@ -35,7 +35,8 @@ var isBackwardsCase: bool = false
 var avoidsRight: bool = true
 var courseStarted: bool = false
 var isGoneFromT: bool = false
-var justAvoidedObstacle: bool = false
+var justAvoidedObstacleRight: bool = false
+var justAvoidedObstacleLeft: bool = false
 var isStraight: bool = false
 
 var jsonSensorReadFilePath = "/home/pi/sensors.json"
@@ -82,7 +83,10 @@ func _physics_process(delta: float):
 					avoidObstacleGauche()
 				steer_direction = lerp(steer_direction, desiredSteering * steering_angle, steeringSpeed * delta)
 			elif !avoidingObstacle:
-				lineFollower()
+				if (avoidsRight):
+					lineFollowerRight()
+				else:
+					lineFollowerLeft()
 				steer_direction = lerp(steer_direction, desiredSteering * steering_angle, steeringSpeed * delta)
 	calculate_steering(delta)
 	calculate_acceleration(delta)
@@ -176,7 +180,7 @@ func getJsonInfo():
 	lastJsonData = json_as_dict
 	return json_as_dict
 
-func lineFollower():
+func lineFollowerRight():
 	var info = getJsonLineInfo()
 	
 	twoLastStates.insert(0, info)
@@ -188,53 +192,137 @@ func lineFollower():
 		if (info == [false, false, true, false, false]):
 			setDesiredSpeed(0.8)
 			setDesiredSteering(0.09)
-			justAvoidedObstacle = false
+			justAvoidedObstacleRight = false
 			lineNotFound = false
 			
 		#cas ou on se prepare a entrer dans une courbe vers la gauche
-		elif (info == [false, true, true, false, false] && !justAvoidedObstacle):
+		elif (info == [false, true, true, false, false] && !justAvoidedObstacleRight):
 			setDesiredSpeed(0.3)
 			setDesiredSteering(-0.25)
 			lineNotFound = false
 			
 		#cas ou on commence la courbe vers la gauche
-		elif (info == [false, true, false, false, false] && !justAvoidedObstacle):
+		elif (info == [false, true, false, false, false] && !justAvoidedObstacleRight):
 			setDesiredSpeed(0.3)
 			setDesiredSteering(-0.5)
 			lineNotFound = false
 		
 		#cas ou on prepare le gros virage dans la courbe vers la gauche
-		elif (info == [true, true, false, false, false] && !justAvoidedObstacle):
+		elif (info == [true, true, false, false, false] && !justAvoidedObstacleRight):
 			setDesiredSpeed(0.2)
 			setDesiredSteering(-0.75)
 			lineNotFound = false
 			
 		#cas ou on est dans la courbe vers la gauche
-		elif (info == [true, false, false, false, false] && !justAvoidedObstacle):
+		elif (info == [true, false, false, false, false] && !justAvoidedObstacleRight):
 			setDesiredSpeed(0.2)
 			setDesiredSteering(-1)
 			lineNotFound = false
 			
 		#cas ou on se prepare a entrer dans une courbe vers la droite
-		elif (info == [false, false, true, true, false] && !justAvoidedObstacle):
+		elif (info == [false, false, true, true, false] && !justAvoidedObstacleRight):
 			setDesiredSpeed(0.3)
 			setDesiredSteering(0.25)
 			lineNotFound = false
 		
 		#cas ou on prepare le gros virage dans la courbe vers la droite
-		elif (info == [false, false, false, true, true] && !justAvoidedObstacle):
+		elif (info == [false, false, false, true, true] && !justAvoidedObstacleRight):
 			setDesiredSpeed(0.2)
 			setDesiredSteering(0.75)
 			lineNotFound = false
 		
 		#cas ou on commence la courbe vers la droite
-		elif (info == [false, false, false, true, false] && !justAvoidedObstacle):
+		elif (info == [false, false, false, true, false] && !justAvoidedObstacleRight):
 			setDesiredSpeed(0.3)
 			setDesiredSteering(0.5)
 			lineNotFound = false
 		
 		#cas ou on est dans la courbe vers la droite
 		elif (info == [false, false, false, false, true]):
+			setDesiredSpeed(0.2)
+			setDesiredSteering(1)
+			lineNotFound = false
+		
+		elif (info == [false, false, false, false, false] && lineNotFound):
+			setDesiredSpeed(0.2)
+			setDesiredSteering(0)
+		
+		#cas ou on a un angle droit vers la gauche
+		elif (twoLastStates == [[true, true, true, false, false], [true, true, true, false, false], [true, true, true, false, false]]):
+			setDesiredSpeed(0.1)
+			setDesiredSteering(-0.8)
+		
+		#cas ou on a un angle droit vers la droite
+		elif (twoLastStates == [[false, false, true, true, true], [false, false, true, true, true], [false, false, true, true, true]]):
+			setDesiredSpeed(0.1)
+			setDesiredSteering(1)
+			
+		# T est detecte
+		elif (twoLastStates == [[true, true, true, true, true], [true, true, true, true, true], [true, true, true, true, true]]):
+			setDesiredSpeed(0)
+			setDesiredSteering(0)
+			courseEnded = true
+			setThonking("🥳")
+
+func lineFollowerLeft():
+	var info = getJsonLineInfo()
+	
+	twoLastStates.insert(0, info)
+	if twoLastStates.size() > 3:
+		twoLastStates.pop_back()
+	
+	if !courseEnded:
+		#cas ou la ligne est au milieu
+		if (info == [false, false, true, false, false]):
+			setDesiredSpeed(0.8)
+			setDesiredSteering(0.09)
+			justAvoidedObstacleLeft = false
+			lineNotFound = false
+			
+		#cas ou on se prepare a entrer dans une courbe vers la gauche
+		elif (info == [false, true, true, false, false] && !justAvoidedObstacleLeft):
+			setDesiredSpeed(0.3)
+			setDesiredSteering(-0.25)
+			lineNotFound = false
+			
+		#cas ou on commence la courbe vers la gauche
+		elif (info == [false, true, false, false, false] && !justAvoidedObstacleLeft):
+			setDesiredSpeed(0.3)
+			setDesiredSteering(-0.5)
+			lineNotFound = false
+		
+		#cas ou on prepare le gros virage dans la courbe vers la gauche
+		elif (info == [true, true, false, false, false] && !justAvoidedObstacleLeft):
+			setDesiredSpeed(0.2)
+			setDesiredSteering(-0.75)
+			lineNotFound = false
+			
+		#cas ou on est dans la courbe vers la gauche
+		elif (info == [true, false, false, false, false]):
+			setDesiredSpeed(0.2)
+			setDesiredSteering(-1)
+			lineNotFound = false
+			
+		#cas ou on se prepare a entrer dans une courbe vers la droite
+		elif (info == [false, false, true, true, false] && !justAvoidedObstacleLeft):
+			setDesiredSpeed(0.3)
+			setDesiredSteering(0.25)
+			lineNotFound = false
+		
+		#cas ou on prepare le gros virage dans la courbe vers la droite
+		elif (info == [false, false, false, true, true] && !justAvoidedObstacleLeft):
+			setDesiredSpeed(0.2)
+			setDesiredSteering(0.75)
+			lineNotFound = false
+		
+		#cas ou on commence la courbe vers la droite
+		elif (info == [false, false, false, true, false] && !justAvoidedObstacleLeft):
+			setDesiredSpeed(0.3)
+			setDesiredSteering(0.5)
+			lineNotFound = false
+		
+		#cas ou on est dans la courbe vers la droite
+		elif (info == [false, false, false, false, true] && !justAvoidedObstacleLeft):
 			setDesiredSpeed(0.2)
 			setDesiredSteering(1)
 			lineNotFound = false
@@ -335,7 +423,7 @@ func avoidObstacleDroite():
 		setThonking("✌️")
 		setDesiredSpeed(0.8)
 		setDesiredSteering(-0.75) #-0.55
-		justAvoidedObstacle = true
+		justAvoidedObstacleRight = true
 		if (getJsonLineInfo() != [false, false, false, false, false]):
 			setDesiredSpeed(0)
 			await get_tree().create_timer(0.5).timeout
@@ -368,20 +456,20 @@ func avoidObstacleGauche():
 			setDesiredSpeed(0.4)
 			setDesiredSteering(0.07)
 			setThonking('HALLELUJAH')
-			await get_tree().create_timer(3.75).timeout #2.75
+			await get_tree().create_timer(3.5).timeout #2.75
 			step = 3
 	elif (step == 3):
 		isStraight = false
 		setThonking("✌️")
 		setDesiredSpeed(0.8)
 		setDesiredSteering(0.6) #-0.55
-		justAvoidedObstacle = true
+		justAvoidedObstacleLeft = true
 		if (getJsonLineInfo() != [false, false, false, false, false]):
 			setDesiredSpeed(0)
 			await get_tree().create_timer(0.5).timeout
+			step = 0
 			avoidingObstacle = false
 			setThonking('I CAME')
-			step = 0
 
 func setThonking(_text):
 	thonking = _text
