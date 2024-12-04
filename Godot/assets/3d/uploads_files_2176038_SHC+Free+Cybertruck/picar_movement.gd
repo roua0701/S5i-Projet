@@ -420,7 +420,7 @@ func avoidObstacleDroite():
 			setDesiredSteering(0.7)
 		if (getJsonObstacleInfo() > distanceToAvoidObstacle):
 			isStraight = true
-			setDesiredSpeed(0.4)
+			setDesiredSpeed(0.55)
 			setDesiredSteering(0.07)
 			setThonking('HALLELUJAH')
 			await get_tree().create_timer(4.75).timeout #2.75
