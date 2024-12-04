@@ -444,7 +444,7 @@ func avoidObstacleGauche():
 	elif (step == 1):
 		setThonking("🫥")
 		setDesiredSteering(0.09)
-		setDesiredSpeed(-0.2)
+		setDesiredSpeed(-0.2/fasterSpeedDamping)
 		if (getJsonObstacleInfo() > 20):
 			setDesiredSpeed(0)
 			await get_tree().create_timer(2).timeout
@@ -452,7 +452,7 @@ func avoidObstacleGauche():
 	elif (step == 2):
 		if (!isStraight):
 			setThonking("🎯")
-			setDesiredSpeed(0.5)
+			setDesiredSpeed(0.5/fasterSpeedDamping)
 			setDesiredSteering(-0.7)
 		if (getJsonObstacleInfo() > distanceToAvoidObstacle):
 			isStraight = true
@@ -464,7 +464,7 @@ func avoidObstacleGauche():
 	elif (step == 3):
 		isStraight = false
 		setThonking("✌️")
-		setDesiredSpeed(0.8)
+		setDesiredSpeed(0.8/fasterSpeedDamping)
 		setDesiredSteering(0.6) #-0.55
 		justAvoidedObstacleLeft = true
 		if (getJsonLineInfo() != [false, false, false, false, false]):
