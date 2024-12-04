@@ -374,7 +374,7 @@ func avoidObstacleGauche():
 		isStraight = false
 		setThonking("✌️")
 		setDesiredSpeed(0.8)
-		setDesiredSteering(0.75) #-0.55
+		setDesiredSteering(0.6) #-0.55
 		justAvoidedObstacle = true
 		if (getJsonLineInfo() != [false, false, false, false, false]):
 			setDesiredSpeed(0)
