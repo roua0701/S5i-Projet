@@ -32,6 +32,7 @@ var courseEnded: bool = false
 var lineNotFound: bool = true
 
 var isBackwardsCase: bool = false
+var avoidsRight: bool = true
 var courseStarted: bool = false
 var isGoneFromT: bool = false
 var justAvoidedObstacle: bool = false
@@ -47,6 +48,11 @@ func _ready() -> void:
 		isBackwardsCase = true
 	else:
 		isBackwardsCase = false
+		
+	if getAvoidObstacleDirection() == "true":
+		avoidsRight = true
+	else:
+		avoidsRight = false
 	capteurCD = $Capteurs/capteur1
 	capteurCG = $Capteurs/capteur2
 	capteurC = $Capteurs/capteur3
@@ -70,7 +76,10 @@ func _physics_process(delta: float):
 		else:
 			print("thonking:", thonking)
 			if getJsonObstacleInfo() < 12 && getJsonObstacleInfo() != 0 || avoidingObstacle:
-				avoidObstacle()
+				if (avoidsRight):
+					avoidObstacleDroite()
+				else:
+					avoidObstacleGauche()
 				steer_direction = lerp(steer_direction, desiredSteering * steering_angle, steeringSpeed * delta)
 			elif !avoidingObstacle:
 				lineFollower()
@@ -144,6 +153,9 @@ func getJsonObstacleInfo():
 func getIsBackwardsCaseJson():
 	return getJsonInfo().get("isBackwardsCase")
 
+func getAvoidObstacleDirection():
+	return getJsonInfo().get("avoidsRight")
+	
 func getJsonLineInfo():
 	var lineData = getJsonInfo().get("line")
 	var info = []
@@ -290,7 +302,7 @@ func backwardsCase():
 		setDesiredSteering(0)
 		setThonking("stoppin the booty shakin")
 
-func avoidObstacle():
+func avoidObstacleDroite():
 	avoidingObstacle = true
 	
 	if (step == 0):
@@ -323,6 +335,46 @@ func avoidObstacle():
 		setThonking("✌️")
 		setDesiredSpeed(0.8)
 		setDesiredSteering(-0.75) #-0.55
+		justAvoidedObstacle = true
+		if (getJsonLineInfo() != [false, false, false, false, false]):
+			setDesiredSpeed(0)
+			await get_tree().create_timer(0.5).timeout
+			step = 0
+			avoidingObstacle = false
+
+func avoidObstacleGauche():
+	avoidingObstacle = true
+	
+	if (step == 0):
+		setThonking("🤨")
+		setDesiredSpeed(0)
+		await get_tree().create_timer(2).timeout
+		step = 1
+	elif (step == 1):
+		setThonking("🫥")
+		setDesiredSteering(0.09)
+		setDesiredSpeed(-0.2)
+		if (getJsonObstacleInfo() > 20):
+			setDesiredSpeed(0)
+			await get_tree().create_timer(2).timeout
+			step = 2
+	elif (step == 2):
+		if (!isStraight):
+			setThonking("🎯")
+			setDesiredSpeed(0.5)
+			setDesiredSteering(-0.7)
+		if (getJsonObstacleInfo() > 100):
+			isStraight = true
+			setDesiredSpeed(0.4)
+			setDesiredSteering(0.07)
+			setThonking('HALLELUJAH')
+			await get_tree().create_timer(4.25).timeout #2.75
+			step = 3
+	elif (step == 3):
+		isStraight = false
+		setThonking("✌️")
+		setDesiredSpeed(0.8)
+		setDesiredSteering(0.75) #-0.55
 		justAvoidedObstacle = true
 		if (getJsonLineInfo() != [false, false, false, false, false]):
 			setDesiredSpeed(0)
