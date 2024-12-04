@@ -39,7 +39,7 @@ var justAvoidedObstacleRight: bool = false
 var justAvoidedObstacleLeft: bool = false
 var isStraight: bool = false
 
-var distanceToAvoidObstacle:int = 80
+var distanceToAvoidObstacle:int = 60
 var fasterSpeedDamping = 1.5
 
 var jsonSensorReadFilePath = "/home/pi/sensors.json"
