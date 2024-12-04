@@ -261,7 +261,9 @@ func lineFollowerRight():
 			setDesiredSteering(1)
 			
 		# T est detecte
-		elif (twoLastStates == [[true, true, true, true, true], [true, true, true, true, true], [true, true, true, true, true]]):
+		elif (twoLastStates == [[true, true, true, true, true], [true, true, true, true, true], [true, true, true, true, true]] || 
+			  info == [true, true, true, true, false] ||
+			  info == [false, true, true, true, true]):
 			setDesiredSpeed(0)
 			setDesiredSteering(0)
 			courseEnded = true
