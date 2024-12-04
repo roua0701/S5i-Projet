@@ -347,7 +347,9 @@ func lineFollowerLeft():
 			setDesiredSteering(1)
 			
 		# T est detecte
-		elif (twoLastStates == [[true, true, true, true, true], [true, true, true, true, true], [true, true, true, true, true]]):
+		elif (twoLastStates == [[true, true, true, true, true], [true, true, true, true, true], [true, true, true, true, true]] ||
+			  info == [true, true, true, true, false] ||
+			  info == [false, true, true, true, true]):
 			setDesiredSpeed(0)
 			setDesiredSteering(0)
 			courseEnded = true
@@ -474,7 +476,6 @@ func avoidObstacleGauche():
 			await get_tree().create_timer(0.5).timeout
 			step = 0
 			avoidingObstacle = false
-			setThonking('I CAME')
 
 func setThonking(_text):
 	thonking = _text
