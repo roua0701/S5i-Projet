@@ -186,7 +186,7 @@ func lineFollower():
 	if !courseEnded:
 		#cas ou la ligne est au milieu
 		if (info == [false, false, true, false, false]):
-			setDesiredSpeed(0.45)
+			setDesiredSpeed(0.7)
 			setDesiredSteering(0.09)
 			justAvoidedObstacle = false
 			lineNotFound = false
