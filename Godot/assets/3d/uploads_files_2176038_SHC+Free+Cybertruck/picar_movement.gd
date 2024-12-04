@@ -368,7 +368,7 @@ func avoidObstacleGauche():
 			setDesiredSpeed(0.4)
 			setDesiredSteering(0.07)
 			setThonking('HALLELUJAH')
-			await get_tree().create_timer(4.25).timeout #2.75
+			await get_tree().create_timer(3.25).timeout #2.75
 			step = 3
 	elif (step == 3):
 		isStraight = false
