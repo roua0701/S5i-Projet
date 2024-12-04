@@ -379,8 +379,9 @@ func avoidObstacleGauche():
 		if (getJsonLineInfo() != [false, false, false, false, false]):
 			setDesiredSpeed(0)
 			await get_tree().create_timer(0.5).timeout
-			step = 0
 			avoidingObstacle = false
+			setThonking('I CAME')
+			step = 0
 
 func setThonking(_text):
 	thonking = _text
