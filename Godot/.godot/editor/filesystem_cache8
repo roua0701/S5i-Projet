@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1733322620
+::res://::1733409391
 camManager.gd::GDScript::-1::1732377441::0::1::::<>Node3D<>::
 capteurs.gd::GDScript::-1::1732377441::0::1::::<>Node3D<>::
 debug_draw_3d.gd::GDScript::-1::1732377441::0::1::::<>RefCounted<>::
@@ -7,7 +7,7 @@ debug_overlay.gd::GDScript::-1::1732377441::0::1::::<>RefCounted<>::
 Draw3D.gd::GDScript::-1::1732377441::0::1::::<>Node<>::
 export_presets.cfg::TextFile::-1::1732377441::0::1::::<><>::
 icon.svg::CompressedTexture2D::1374322914596704389::1732377441::1732378858::1::::<><>::
-main.tscn::PackedScene::3150966554309188884::1733247008::0::1::::<><>::res://scripts/main.gd<>res://addons/finite_state_machine/scripts/finite_state_machine.gd<>res://scripts/fsm/NetworkInitState.gd<>res://scripts/fsm/NetworkWaitingState.gd<>res://scripts/fsm/NetworkConnectingState.gd<>res://scripts/fsm/NetworkProcessState.gd<>res://assets/3d/uploads_files_2176038_SHC+Free+Cybertruck/picar_movement.gd<>uid://dhw27gk6nbfgu::::res://assets/3d/uploads_files_2176038_SHC+Free+Cybertruck/SHC Free Cybertruck.blend
+main.tscn::PackedScene::3150966554309188884::1733330084::0::1::::<><>::res://scripts/main.gd<>res://addons/finite_state_machine/scripts/finite_state_machine.gd<>res://scripts/fsm/NetworkInitState.gd<>res://scripts/fsm/NetworkWaitingState.gd<>res://scripts/fsm/NetworkConnectingState.gd<>res://scripts/fsm/NetworkProcessState.gd<>res://assets/3d/uploads_files_2176038_SHC+Free+Cybertruck/picar_movement.gd<>uid://dhw27gk6nbfgu::::res://assets/3d/uploads_files_2176038_SHC+Free+Cybertruck/SHC Free Cybertruck.blend
 moving_obstacle.gd::GDScript::-1::1732377441::0::1::::<>CSGBox3D<>::
 spawn_manager.gd::GDScript::-1::1732377441::0::1::::<>Node3D<>::
 ::res://addons/::1732377441
@@ -29,8 +29,8 @@ camera.gd::GDScript::-1::1732377441::0::1::::FreeLookCamera<>Camera3D<>::
 README.md::TextFile::-1::1732377441::0::1::::<><>::
 ::res://assets/::1732377441
 ::res://assets/3d/::1732377441
-::res://assets/3d/uploads_files_2176038_SHC+Free+Cybertruck/::1733247008
-picar_movement.gd::GDScript::-1::1733247008::0::1::::<>Node3D<>::
+::res://assets/3d/uploads_files_2176038_SHC+Free+Cybertruck/::1733330080
+picar_movement.gd::GDScript::-1::1733330080::0::1::::<>Node3D<>::
 SHC Free Cybertruck.blend::PackedScene::7697697103358556972::1732377441::1732378862::1::::<><>::
 ::res://assets/blend/::1732378861
 parcours.blend::PackedScene::2672271465074343887::1732377441::1732378861::1::::<><>::

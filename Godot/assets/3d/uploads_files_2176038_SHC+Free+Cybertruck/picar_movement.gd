@@ -443,7 +443,7 @@ func avoidObstacleGauche():
 	if (step == 0):
 		setThonking("🤨")
 		setDesiredSpeed(0)
-		await get_tree().create_timer(2).timeout
+		#await get_tree().create_timer(2).timeout
 		step = 1
 	elif (step == 1):
 		setThonking("🫥")
@@ -451,7 +451,7 @@ func avoidObstacleGauche():
 		setDesiredSpeed(-0.2)
 		if (getJsonObstacleInfo() > 20):
 			setDesiredSpeed(0)
-			await get_tree().create_timer(2).timeout
+			#await get_tree().create_timer(2).timeout
 			step = 2
 	elif (step == 2):
 		if (!isStraight):
